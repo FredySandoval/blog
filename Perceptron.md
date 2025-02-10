@@ -130,3 +130,57 @@ function rotat(x1,y1, x2,y2, angle) {//angle in radians
 }
 
 </script>
+<script>
+	 let angle = 0;
+let angle2 = 0;
+let total = 50;
+ let path1 = [];
+let c = 0;
+function setup() {
+  createCanvas(650, 650);
+ 
+}
+
+function draw() {
+  background(0);
+	translate(width/2,height/2);stroke(255);strokeWeight(4);noFill();
+   for(let i =0;i<total;i++){
+   		let num = 360 / total;
+    let x2 = cos((angle + num *i*PI/180)*5) *200;
+    let  y2 = sin((angle+ num*i*PI/180)*3) *200;
+   estrella(x2,y2,20)
+   }
+	angle+=0.001;
+ // estrella(0,0,10);
+}
+
+
+function estrella(sX,sY,diam){
+  push();
+  strokeWeight(1);stroke(255);
+  
+  this.path = [];
+  this.angle = PI/3.3;
+  this.numC =5;
+  this.diam= diam;
+		for(let i = 0;i<numC;i++){
+      let num = 360 / numC;
+      this.x = cos(angle+num*i*PI/180) * diam;
+      this.y = sin(angle+num*i*PI/180) * diam;
+		  let	v = createVector(this.x,this.y);
+		  this.path[i+i] = v;
+      this.x = cos(0.6+angle+num*i*PI/180) * diam/2;
+		  this.y = sin(0.6+angle+num*i*PI/180) * diam/2;
+	  	v = createVector(this.x,this.y);
+	  	this.path[2*i+1] = v;
+    }
+	beginShape();
+  noFill()
+	for(let m of this.path){
+		vertex(m.x+sX, m.y+sY);
+	}
+	endShape(CLOSE);
+  pop();
+}
+
+</script>
